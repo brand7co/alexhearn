@@ -44,7 +44,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.6rem 3.5rem;
-  background-color: #0A0A0A;
+  background-color: rgba(10,10,10,0.92);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
@@ -75,32 +75,41 @@ nav {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: rgba(255,255,255,0.6);
   text-decoration: none;
   transition: color 0.2s;
-  opacity: 0.6;
 }
-.nav-links a:hover { opacity: 1; }
+.nav-links a:hover { color: #FFFFFF; }
 
 /* ——— HERO ——— */
 .hero {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10rem 3.5rem 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 3.5rem 5rem;
   position: relative;
+  overflow: hidden;
   background-color: #0A0A0A;
 }
 
-.hero-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(4.5rem, 12vw, 11rem);
-  font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -0.02em;
-  color: #FFFFFF;
-  margin-bottom: 2.5rem;
+/* Background photo */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('your-photo.jpg'); /* REPLACE with your photo filename */
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.18;
+  z-index: 0;
+}
+
+.hero-left {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   animation: fadeUp 0.8s ease both;
 }
 
@@ -111,7 +120,6 @@ nav {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #888888;
-  animation: fadeUp 0.8s 0.15s ease both;
   min-height: 1.4em;
 }
 
@@ -120,7 +128,7 @@ nav {
   position: relative;
   height: 1.4em;
   overflow: hidden;
-  min-width: 18ch;
+  min-width: 22ch;
 }
 
 .hero-roles-cycling span {
@@ -132,16 +140,39 @@ nav {
   transform: translateY(110%);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
-
 .hero-roles-cycling span.active {
   opacity: 1;
   transform: translateY(0);
 }
-
 .hero-roles-cycling span.exit {
   opacity: 0;
   transform: translateY(-110%);
   transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.hero-bio {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.3;
+  color: #FFFFFF;
+}
+
+.hero-bio em {
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+}
+
+.hero-bio-sub {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #888888;
+  max-width: 38ch;
+}
+
+.hero-right {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-line {
@@ -152,6 +183,7 @@ nav {
   height: 60px;
   background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
   animation: fadeIn 1s 0.6s ease both;
+  z-index: 1;
 }
 
 /* ——— SLICES ——— */
@@ -208,23 +240,7 @@ nav {
   margin-top: 0.5rem;
 }
 .slice-cta::after { content: '↗'; font-size: 0.9rem; }
-.slice.coming .slice-cta { color: #888888; }
-
-.slice-right {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.slice-aside p {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.25;
-  color: rgba(255,255,255,0.15);
-  text-align: right;
-}
+.slice-cta.muted { color: #888888; }
 
 /* ——— COMBINED PIXIESET + CONTACT ——— */
 .slice-combined {
@@ -238,7 +254,7 @@ nav {
 }
 
 .combined-left { display: flex; flex-direction: column; gap: 1.2rem; }
-.combined-right { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 0.5rem; }
+.combined-right { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 0.25rem; }
 
 .contact-label {
   font-size: 0.62rem;
@@ -290,26 +306,13 @@ footer {
   border-top: 1px solid rgba(255,255,255,0.08);
   background-color: #0A0A0A;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
 }
-
-.footer-links { display: flex; gap: 2rem; list-style: none; }
-.footer-links a {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #888888;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: #FFFFFF; }
 
 .footer-copy {
   font-size: 0.62rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.2);
 }
@@ -327,12 +330,12 @@ footer {
 /* ——— MOBILE ——— */
 @media (max-width: 700px) {
   nav { padding: 1.2rem 1.5rem; }
-  .hero { padding: 8rem 1.5rem 5rem; }
+  .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 5rem; gap: 2rem; }
+  .hero-right { display: none; }
   .slice { padding: 4rem 1.5rem; }
   .slice-inner { grid-template-columns: 1fr; gap: 2rem; }
-  .slice-right { display: none; }
   .slice-combined { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
-  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  footer { padding: 2rem 1.5rem; }
 }
 ```
 
@@ -350,15 +353,32 @@ footer {
   <!-- HERO -->
 
   <section class="hero">
-    <h1 class="hero-name">Alex<br/>Hearn</h1>
-    <div class="hero-roles">
-      <div class="hero-roles-cycling" id="roleCycle">
-        <span>Photography</span>
-        <span>Brand Strategy</span>
-        <span>Entrepreneur</span>
-      </div>
+    <div class="hero-bg"></div>
+
+```
+<div class="hero-left">
+  <div class="hero-roles">
+    <div class="hero-roles-cycling" id="roleCycle">
+      <span>Project Management</span>
+      <span>Entrepreneur</span>
+      <span>Photography</span>
     </div>
-    <div class="hero-line"></div>
+  </div>
+
+  <h1 class="hero-bio">
+    Builder. Strategist.<br/>
+    <em>Creative at heart.</em>
+  </h1>
+
+  <p class="hero-bio-sub">
+    I help founders and brands find their voice — then build the systems to back it up. Based between the lens and the boardroom.
+  </p>
+</div>
+
+<div class="hero-right"></div>
+<div class="hero-line"></div>
+```
+
   </section>
 
   <!-- BRAND7 SLICE -->
@@ -371,11 +391,7 @@ footer {
         <p class="slice-desc">Strategic brand consulting for founders and businesses ready to build something lasting.</p>
         <span class="slice-cta">Visit</span>
       </div>
-      <div class="slice-right">
-        <div class="slice-aside">
-          <p>Ready to start a conversation?</p>
-        </div>
-      </div>
+      <div></div>
     </div>
   </div>
 
@@ -386,7 +402,7 @@ footer {
       <span class="slice-tag">Portfolio · Coming Soon</span>
       <h2 class="slice-title">Pixieset</h2>
       <p class="slice-desc">A curated portfolio of creative and visual work. This one's worth the wait.</p>
-      <span class="slice-cta coming" style="color:#888888;">Coming Soon</span>
+      <span class="slice-cta muted">Coming Soon</span>
     </div>
     <div class="combined-right">
       <span class="contact-label">Let's Partner Up</span>
@@ -399,11 +415,6 @@ footer {
   <!-- FOOTER -->
 
   <footer>
-    <ul class="footer-links">
-      <li><a href="https://brand7.co" target="_blank" rel="noopener">Brand7.co</a></li>
-      <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a href="mailto:alex@brand7.co">Email</a></li>
-    </ul>
     <span class="footer-copy">© 2026 Alex Hearn</span>
   </footer>
 
