@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,101 +8,393 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Didact+Gothic&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --white: #FFFFFF; --off: #F7F5F2; --black: #0A0A0A;
-      --dark: #111111; --mid: #888888; --border: #E2DDD8; --accent: #C4922A;
-    }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Didact Gothic', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
-    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.04; pointer-events: none; z-index: 1000; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; display: flex; justify-content: space-between; align-items: center; padding: 1.6rem 3.5rem; background: rgba(10,10,10,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .nav-wordmark { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: var(--white); text-decoration: none; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { font-family: 'Didact Gothic', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--white); }
-    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 10rem 3.5rem 5rem; position: relative; }
-    .hero-eyebrow { font-family: 'Didact Gothic', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mid); margin-bottom: 2rem; animation: fadeUp 0.8s ease both; }
-    .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(4rem, 11vw, 10rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.02em; color: var(--white); margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.1s ease both; }
-    .hero-roles { font-family: 'Didact Gothic', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); display: flex; gap: 1.5rem; align-items: center; animation: fadeUp 0.8s 0.2s ease both; }
-    .hero-roles span { color: var(--accent); }
-    .hero-line { position: absolute; bottom: 3rem; left: 3.5rem; width: 1px; height: 60px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent); animation: fadeIn 1s 0.6s ease both; }
-    section { padding: 7rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
-    .section-label { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; }
-    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .card { border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); padding: 3rem 3.5rem; display: flex; flex-direction: column; gap: 1.2rem; background: rgba(255,255,255,0.02); transition: background 0.3s, border-color 0.3s, transform 0.3s; text-decoration: none; color: inherit; position: relative; overflow: hidden; }
-    .card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); transform: translateY(-3px); }
-    .card-tag { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; line-height: 1.1; color: var(--white); }
-    .card-desc { font-size: 0.82rem; line-height: 1.7; color: var(--mid); max-width: 28ch; }
-    .card-cta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); display: flex; align-items: center; gap: 0.5rem; margin-top: auto; }
-    .card-cta::after { content: '↗'; font-size: 0.9rem; }
-    .card.coming .card-cta { color: var(--mid); }
-    .contact { display: flex; flex-direction: column; gap: 1.5rem; }
-    .contact-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.05; max-width: 14ch; }
-    .contact-headline em { font-style: italic; color: var(--mid); }
-    .contact-sub { font-size: 0.82rem; color: var(--mid); max-width: 40ch; line-height: 1.7; }
-    .contact-email { display: inline-flex; align-items: center; gap: 0.8rem; font-family: 'Didact Gothic', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); text-decoration: none; border: 1px solid rgba(255,255,255,0.15); padding: 1rem 2rem; border-radius: 999px; margin-top: 1rem; width: fit-content; transition: background 0.2s, border-color 0.2s; }
-    .contact-email:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
-    .contact-email::after { content: '↗'; }
-    footer { padding: 3rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
-    .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; color: var(--white); }
-    .footer-links { display: flex; gap: 2rem; list-style: none; }
-    .footer-links a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @media (max-width: 700px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .hero { padding: 8rem 1.5rem 4rem; }
-      section { padding: 5rem 1.5rem; }
-      .cards { grid-template-columns: 1fr; }
-      .card { border-radius: 2rem; padding: 2.5rem 2rem; }
-      footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
-    }
+
+```
+:root {
+  --white: #FFFFFF;
+  --black: #0A0A0A;
+  --mid:   #888888;
+  --accent: #C4922A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Didact Gothic', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ——— NAV ——— */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 3.5rem;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.nav-logo:hover {
+  border-color: var(--accent);
+  background: rgba(196,146,42,0.08);
+}
+
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+/* ——— HERO ——— */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 3.5rem 6rem;
+  position: relative;
+}
+
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(4.5rem, 12vw, 11rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: 2.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-roles {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid);
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-roles-cycling {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 1.1em;
+  vertical-align: bottom;
+  min-width: 16ch;
+}
+
+.hero-roles-cycling span {
+  position: absolute;
+  left: 0; top: 0;
+  color: var(--accent);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(110%);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.hero-roles-cycling span.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-roles-cycling span.exit {
+  opacity: 0;
+  transform: translateY(-110%);
+}
+
+.hero-line {
+  position: absolute;
+  bottom: 3rem;
+  left: 3.5rem;
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  animation: fadeIn 1s 0.6s ease both;
+}
+
+/* ——— SLICES ——— */
+.slice {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 6rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  transition: background 0.3s;
+}
+.slice.clickable {
+  cursor: pointer;
+}
+.slice.clickable:hover { background: rgba(255,255,255,0.02); }
+
+.slice-left { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.slice-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.slice-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.0;
+  color: var(--white);
+}
+
+.slice-desc {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--mid);
+  max-width: 36ch;
+}
+
+.slice-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-top: 0.5rem;
+}
+.slice-cta::after { content: '↗'; font-size: 0.9rem; }
+.slice.coming .slice-cta { color: var(--mid); }
+
+.slice-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.slice-aside {
+  max-width: 28ch;
+  text-align: right;
+}
+
+.slice-aside p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.18);
+}
+
+/* ——— CONTACT ——— */
+#contact {
+  padding: 7rem 3.5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.section-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 3rem;
+}
+
+.contact-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 1.05;
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
+}
+.contact-headline em { font-style: italic; color: var(--mid); }
+
+.contact-sub {
+  font-size: 0.82rem;
+  color: var(--mid);
+  max-width: 40ch;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  width: fit-content;
+  transition: background 0.2s, border-color 0.2s;
+}
+.contact-email:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.3);
+}
+.contact-email::after { content: '↗'; }
+
+/* ——— FOOTER ——— */
+footer {
+  padding: 3rem 3.5rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.footer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-copy {
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ——— ANIMATIONS ——— */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ——— MOBILE ——— */
+@media (max-width: 700px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .hero { padding: 8rem 1.5rem 5rem; }
+  .slice { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+  .slice-right { display: none; }
+  #contact { padding: 5rem 1.5rem; }
+  footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+}
+```
+
   </style>
 </head>
 <body>
+
   <nav>
-    <a class="nav-wordmark" href="#">Alex Hearn</a>
+    <a class="nav-logo" href="#">AH</a>
     <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
+
+  <!-- HERO -->
+
   <section class="hero">
-    <p class="hero-eyebrow">Project Manager &nbsp;◆&nbsp; Brand Strategist &nbsp;◆&nbsp; Entrepreneur</p>
     <h1 class="hero-name">Alex<br/>Hearn</h1>
     <div class="hero-roles">
-      <span>Photography</span>&nbsp;/&nbsp;Brand Strategy&nbsp;/&nbsp;Creative Direction
+      <div class="hero-roles-cycling" id="roleCycle">
+        <span>Photography</span>
+        <span>Brand Strategy</span>
+        <span>Entrepreneur</span>
+      </div>
     </div>
     <div class="hero-line"></div>
   </section>
-  <section id="work">
-    <p class="section-label">Work</p>
-    <div class="cards">
-      <a class="card coming" href="#" aria-label="Pixieset portfolio — coming soon">
-        <span class="card-tag">Portfolio · Coming Soon</span>
-        <h2 class="card-title">Pixieset</h2>
-        <p class="card-desc">A curated portfolio of creative and visual work. This one's worth the wait.</p>
-        <span class="card-cta">Coming Soon</span>
-      </a>
-      <a class="card" href="https://brand7.co" target="_blank" rel="noopener" aria-label="Brand7.co — brand strategy">
-        <span class="card-tag">Brand Strategy</span>
-        <h2 class="card-title">Brand7.co</h2>
-        <p class="card-desc">Strategic brand consulting for founders and businesses ready to build something lasting.</p>
-        <span class="card-cta">Visit</span>
-      </a>
+
+  <!-- BRAND7 SLICE -->
+
+  <div class="slice clickable" onclick="window.open('https://brand7.co','_blank')">
+    <div class="slice-left">
+      <span class="slice-tag">Brand Strategy</span>
+      <h2 class="slice-title">Brand7.co</h2>
+      <p class="slice-desc">Strategic brand consulting for founders and businesses ready to build something lasting.</p>
+      <span class="slice-cta">Visit</span>
     </div>
-  </section>
+    <div class="slice-right">
+      <div class="slice-aside">
+        <p>Ready to start a conversation?</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIXIESET SLICE -->
+
+  <div class="slice coming">
+    <div class="slice-left">
+      <span class="slice-tag">Portfolio · Coming Soon</span>
+      <h2 class="slice-title">Pixieset</h2>
+      <p class="slice-desc">A curated portfolio of creative and visual work. This one's worth the wait.</p>
+      <span class="slice-cta">Coming Soon</span>
+    </div>
+    <div class="slice-right"></div>
+  </div>
+
+  <!-- CONTACT -->
+
   <section id="contact">
     <p class="section-label">Let's Partner Up</p>
-    <div class="contact">
-      <h2 class="contact-headline">Ready to start<br/><em>a conversation?</em></h2>
-      <p class="contact-sub">What are you trying to build? Let's figure it out.</p>
-      <a class="contact-email" href="mailto:alex@brand7.co">alex@brand7.co</a>
-    </div>
+    <h2 class="contact-headline">Ready to start<br/><em>a conversation?</em></h2>
+    <p class="contact-sub">What are you trying to build? Let's figure it out.</p>
+    <a class="contact-email" href="mailto:alex@brand7.co">alex@brand7.co</a>
   </section>
+
+  <!-- FOOTER -->
+
   <footer>
     <span class="footer-name">Alex Hearn</span>
     <ul class="footer-links">
@@ -111,5 +404,21 @@
     </ul>
     <span class="footer-copy">© 2026 Alex Hearn</span>
   </footer>
+
+  <script>
+    const items = document.querySelectorAll('#roleCycle span');
+    let current = 0;
+    items[current].classList.add('active');
+
+    setInterval(() => {
+      const prev = current;
+      current = (current + 1) % items.length;
+      items[prev].classList.remove('active');
+      items[prev].classList.add('exit');
+      setTimeout(() => items[prev].classList.remove('exit'), 450);
+      items[current].classList.add('active');
+    }, 2200);
+  </script>
+
 </body>
 </html>
