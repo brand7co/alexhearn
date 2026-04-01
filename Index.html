@@ -46,4 +46,70 @@
     footer { padding: 3rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
     .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; color: var(--white); }
     .footer-links { display: flex; gap: 2rem; list-style: none; }
-    .footer-links a { font-size​​​​​​​​​​​​​​​​
+    .footer-links a { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 700px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      .cards { grid-template-columns: 1fr; }
+      .card { border-radius: 2rem; padding: 2.5rem 2rem; }
+      footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="nav-wordmark" href="#">Alex Hearn</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <p class="hero-eyebrow">Project Manager &nbsp;◆&nbsp; Brand Strategist &nbsp;◆&nbsp; Entrepreneur</p>
+    <h1 class="hero-name">Alex<br/>Hearn</h1>
+    <div class="hero-roles">
+      <span>Photography</span>&nbsp;/&nbsp;Brand Strategy&nbsp;/&nbsp;Creative Direction
+    </div>
+    <div class="hero-line"></div>
+  </section>
+  <section id="work">
+    <p class="section-label">Work</p>
+    <div class="cards">
+      <a class="card coming" href="#" aria-label="Pixieset portfolio — coming soon">
+        <span class="card-tag">Portfolio · Coming Soon</span>
+        <h2 class="card-title">Pixieset</h2>
+        <p class="card-desc">A curated portfolio of creative and visual work. This one's worth the wait.</p>
+        <span class="card-cta">Coming Soon</span>
+      </a>
+      <a class="card" href="https://brand7.co" target="_blank" rel="noopener" aria-label="Brand7.co — brand strategy">
+        <span class="card-tag">Brand Strategy</span>
+        <h2 class="card-title">Brand7.co</h2>
+        <p class="card-desc">Strategic brand consulting for founders and businesses ready to build something lasting.</p>
+        <span class="card-cta">Visit</span>
+      </a>
+    </div>
+  </section>
+  <section id="contact">
+    <p class="section-label">Let's Partner Up</p>
+    <div class="contact">
+      <h2 class="contact-headline">Ready to start<br/><em>a conversation?</em></h2>
+      <p class="contact-sub">What are you trying to build? Let's figure it out.</p>
+      <a class="contact-email" href="mailto:alex@brand7.co">alex@brand7.co</a>
+    </div>
+  </section>
+  <footer>
+    <span class="footer-name">Alex Hearn</span>
+    <ul class="footer-links">
+      <li><a href="https://brand7.co" target="_blank" rel="noopener">Brand7.co</a></li>
+      <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="mailto:alex@brand7.co">Email</a></li>
+    </ul>
+    <span class="footer-copy">© 2026 Alex Hearn</span>
+  </footer>
+</body>
+</html>
