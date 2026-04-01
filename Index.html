@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Hearn</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Didact+Gothic&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #FFFFFF; --off: #F7F5F2; --black: #0A0A0A;
+      --dark: #111111; --mid: #888888; --border: #E2DDD8; --accent: #C4922A;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Didact Gothic', sans-serif; background: var(--black); color: var(--white); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.04; pointer-events: none; z-index: 1000; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; display: flex; justify-content: space-between; align-items: center; padding: 1.6rem 3.5rem; background: rgba(10,10,10,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .nav-wordmark { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: var(--white); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Didact Gothic', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--white); }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 10rem 3.5rem 5rem; position: relative; }
+    .hero-eyebrow { font-family: 'Didact Gothic', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mid); margin-bottom: 2rem; animation: fadeUp 0.8s ease both; }
+    .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(4rem, 11vw, 10rem); font-weight: 700; line-height: 0.92; letter-spacing: -0.02em; color: var(--white); margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.1s ease both; }
+    .hero-roles { font-family: 'Didact Gothic', sans-serif; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--mid); display: flex; gap: 1.5rem; align-items: center; animation: fadeUp 0.8s 0.2s ease both; }
+    .hero-roles span { color: var(--accent); }
+    .hero-line { position: absolute; bottom: 3rem; left: 3.5rem; width: 1px; height: 60px; background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent); animation: fadeIn 1s 0.6s ease both; }
+    section { padding: 7rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .section-label { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .card { border-radius: 999px; border: 1px solid rgba(255,255,255,0.1); padding: 3rem 3.5rem; display: flex; flex-direction: column; gap: 1.2rem; background: rgba(255,255,255,0.02); transition: background 0.3s, border-color 0.3s, transform 0.3s; text-decoration: none; color: inherit; position: relative; overflow: hidden; }
+    .card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); transform: translateY(-3px); }
+    .card-tag { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 400; line-height: 1.1; color: var(--white); }
+    .card-desc { font-size: 0.82rem; line-height: 1.7; color: var(--mid); max-width: 28ch; }
+    .card-cta { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); display: flex; align-items: center; gap: 0.5rem; margin-top: auto; }
+    .card-cta::after { content: '↗'; font-size: 0.9rem; }
+    .card.coming .card-cta { color: var(--mid); }
+    .contact { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 400; line-height: 1.05; max-width: 14ch; }
+    .contact-headline em { font-style: italic; color: var(--mid); }
+    .contact-sub { font-size: 0.82rem; color: var(--mid); max-width: 40ch; line-height: 1.7; }
+    .contact-email { display: inline-flex; align-items: center; gap: 0.8rem; font-family: 'Didact Gothic', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); text-decoration: none; border: 1px solid rgba(255,255,255,0.15); padding: 1rem 2rem; border-radius: 999px; margin-top: 1rem; width: fit-content; transition: background 0.2s, border-color 0.2s; }
+    .contact-email:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.3); }
+    .contact-email::after { content: '↗'; }
+    footer { padding: 3rem 3.5rem; border-top: 1px solid rgba(255,255,255,0.07); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; color: var(--white); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size​​​​​​​​​​​​​​​​
