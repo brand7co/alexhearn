@@ -21,8 +21,8 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Didact Gothic', sans-serif;
-  background: var(--black);
-  color: var(--white);
+  background-color: #0A0A0A;
+  color: #FFFFFF;
   overflow-x: hidden;
 }
 
@@ -44,9 +44,9 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 1.6rem 3.5rem;
-  background: rgba(10,10,10,0.92);
+  background-color: #0A0A0A;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .nav-logo {
@@ -55,19 +55,19 @@ nav {
   justify-content: center;
   width: 2.4rem;
   height: 2.4rem;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.4);
   border-radius: 4px;
   font-family: 'Playfair Display', serif;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  color: var(--white);
+  color: #FFFFFF;
   text-decoration: none;
   transition: border-color 0.2s, background 0.2s;
 }
 .nav-logo:hover {
-  border-color: var(--accent);
-  background: rgba(196,146,42,0.08);
+  border-color: #C4922A;
+  background: rgba(196,146,42,0.12);
 }
 
 .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -75,11 +75,12 @@ nav {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: #FFFFFF;
   text-decoration: none;
   transition: color 0.2s;
+  opacity: 0.6;
 }
-.nav-links a:hover { color: var(--white); }
+.nav-links a:hover { opacity: 1; }
 
 /* ——— HERO ——— */
 .hero {
@@ -89,6 +90,7 @@ nav {
   justify-content: center;
   padding: 10rem 3.5rem 6rem;
   position: relative;
+  background-color: #0A0A0A;
 }
 
 .hero-name {
@@ -97,7 +99,7 @@ nav {
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: #FFFFFF;
   margin-bottom: 2.5rem;
   animation: fadeUp 0.8s ease both;
 }
@@ -105,27 +107,26 @@ nav {
 .hero-roles {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: #888888;
   animation: fadeUp 0.8s 0.15s ease both;
+  min-height: 1.4em;
 }
 
 .hero-roles-cycling {
   display: inline-block;
   position: relative;
+  height: 1.4em;
   overflow: hidden;
-  height: 1.1em;
-  vertical-align: bottom;
-  min-width: 16ch;
+  min-width: 18ch;
 }
 
 .hero-roles-cycling span {
   position: absolute;
   left: 0; top: 0;
-  color: var(--accent);
+  color: #C4922A;
   white-space: nowrap;
   opacity: 0;
   transform: translateY(110%);
@@ -140,6 +141,7 @@ nav {
 .hero-roles-cycling span.exit {
   opacity: 0;
   transform: translateY(-110%);
+  transition: opacity 0.45s ease, transform 0.45s ease;
 }
 
 .hero-line {
@@ -154,19 +156,22 @@ nav {
 
 /* ——— SLICES ——— */
 .slice {
-  border-top: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.08);
   padding: 6rem 3.5rem;
+  background-color: #0A0A0A;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.slice.clickable { cursor: pointer; }
+.slice.clickable:hover { background-color: #111111; }
+
+.slice-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
-  position: relative;
-  transition: background 0.3s;
 }
-.slice.clickable {
-  cursor: pointer;
-}
-.slice.clickable:hover { background: rgba(255,255,255,0.02); }
 
 .slice-left { display: flex; flex-direction: column; gap: 1.2rem; }
 
@@ -174,7 +179,7 @@ nav {
   font-size: 0.62rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: #C4922A;
 }
 
 .slice-title {
@@ -182,13 +187,13 @@ nav {
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 400;
   line-height: 1.0;
-  color: var(--white);
+  color: #FFFFFF;
 }
 
 .slice-desc {
   font-size: 0.85rem;
   line-height: 1.75;
-  color: var(--mid);
+  color: #888888;
   max-width: 36ch;
 }
 
@@ -199,21 +204,16 @@ nav {
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--white);
+  color: #FFFFFF;
   margin-top: 0.5rem;
 }
 .slice-cta::after { content: '↗'; font-size: 0.9rem; }
-.slice.coming .slice-cta { color: var(--mid); }
+.slice.coming .slice-cta { color: #888888; }
 
 .slice-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
-
-.slice-aside {
-  max-width: 28ch;
-  text-align: right;
 }
 
 .slice-aside p {
@@ -222,39 +222,45 @@ nav {
   font-weight: 400;
   font-style: italic;
   line-height: 1.25;
-  color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.15);
+  text-align: right;
 }
 
-/* ——— CONTACT ——— */
-#contact {
-  padding: 7rem 3.5rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+/* ——— COMBINED PIXIESET + CONTACT ——— */
+.slice-combined {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 6rem 3.5rem;
+  background-color: #0A0A0A;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
 }
 
-.section-label {
+.combined-left { display: flex; flex-direction: column; gap: 1.2rem; }
+.combined-right { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 0.5rem; }
+
+.contact-label {
   font-size: 0.62rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 3rem;
+  color: #C4922A;
 }
 
 .contact-headline {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
   font-weight: 400;
   line-height: 1.05;
-  max-width: 14ch;
-  margin-bottom: 1.5rem;
+  color: #FFFFFF;
 }
-.contact-headline em { font-style: italic; color: var(--mid); }
+.contact-headline em { font-style: italic; color: #888888; }
 
 .contact-sub {
   font-size: 0.82rem;
-  color: var(--mid);
-  max-width: 40ch;
+  color: #888888;
+  max-width: 36ch;
   line-height: 1.7;
-  margin-bottom: 2rem;
 }
 
 .contact-email {
@@ -264,9 +270,9 @@ nav {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--white);
+  color: #FFFFFF;
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
   padding: 1rem 2rem;
   border-radius: 999px;
   width: fit-content;
@@ -274,35 +280,33 @@ nav {
 }
 .contact-email:hover {
   background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.4);
 }
 .contact-email::after { content: '↗'; }
 
 /* ——— FOOTER ——— */
 footer {
-  padding: 3rem 3.5rem;
-  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 2.5rem 3.5rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background-color: #0A0A0A;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1.5rem;
 }
-.footer-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 400;
-}
+
 .footer-links { display: flex; gap: 2rem; list-style: none; }
 .footer-links a {
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: #888888;
   text-decoration: none;
   transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--white); }
+.footer-links a:hover { color: #FFFFFF; }
+
 .footer-copy {
   font-size: 0.62rem;
   letter-spacing: 0.15em;
@@ -324,10 +328,11 @@ footer {
 @media (max-width: 700px) {
   nav { padding: 1.2rem 1.5rem; }
   .hero { padding: 8rem 1.5rem 5rem; }
-  .slice { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 2rem; }
+  .slice { padding: 4rem 1.5rem; }
+  .slice-inner { grid-template-columns: 1fr; gap: 2rem; }
   .slice-right { display: none; }
-  #contact { padding: 5rem 1.5rem; }
-  footer { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  .slice-combined { padding: 4rem 1.5rem; grid-template-columns: 1fr; gap: 3rem; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
 }
 ```
 
@@ -359,44 +364,41 @@ footer {
   <!-- BRAND7 SLICE -->
 
   <div class="slice clickable" onclick="window.open('https://brand7.co','_blank')">
-    <div class="slice-left">
-      <span class="slice-tag">Brand Strategy</span>
-      <h2 class="slice-title">Brand7.co</h2>
-      <p class="slice-desc">Strategic brand consulting for founders and businesses ready to build something lasting.</p>
-      <span class="slice-cta">Visit</span>
-    </div>
-    <div class="slice-right">
-      <div class="slice-aside">
-        <p>Ready to start a conversation?</p>
+    <div class="slice-inner">
+      <div class="slice-left">
+        <span class="slice-tag">Strategist</span>
+        <h2 class="slice-title">Brand7.co</h2>
+        <p class="slice-desc">Strategic brand consulting for founders and businesses ready to build something lasting.</p>
+        <span class="slice-cta">Visit</span>
+      </div>
+      <div class="slice-right">
+        <div class="slice-aside">
+          <p>Ready to start a conversation?</p>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- PIXIESET SLICE -->
+  <!-- PIXIESET + CONTACT COMBINED -->
 
-  <div class="slice coming">
-    <div class="slice-left">
+  <div class="slice-combined" id="contact">
+    <div class="combined-left">
       <span class="slice-tag">Portfolio · Coming Soon</span>
       <h2 class="slice-title">Pixieset</h2>
       <p class="slice-desc">A curated portfolio of creative and visual work. This one's worth the wait.</p>
-      <span class="slice-cta">Coming Soon</span>
+      <span class="slice-cta coming" style="color:#888888;">Coming Soon</span>
     </div>
-    <div class="slice-right"></div>
+    <div class="combined-right">
+      <span class="contact-label">Let's Partner Up</span>
+      <h2 class="contact-headline">Ready to start<br/><em>a conversation?</em></h2>
+      <p class="contact-sub">What are you trying to build? Let's figure it out.</p>
+      <a class="contact-email" href="mailto:alex@brand7.co">alex@brand7.co</a>
+    </div>
   </div>
-
-  <!-- CONTACT -->
-
-  <section id="contact">
-    <p class="section-label">Let's Partner Up</p>
-    <h2 class="contact-headline">Ready to start<br/><em>a conversation?</em></h2>
-    <p class="contact-sub">What are you trying to build? Let's figure it out.</p>
-    <a class="contact-email" href="mailto:alex@brand7.co">alex@brand7.co</a>
-  </section>
 
   <!-- FOOTER -->
 
   <footer>
-    <span class="footer-name">Alex Hearn</span>
     <ul class="footer-links">
       <li><a href="https://brand7.co" target="_blank" rel="noopener">Brand7.co</a></li>
       <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
